@@ -27,10 +27,6 @@ param(
     [Switch]
     $ComputeShas,
 
-    # Use stable branding version numbers to compute paths
-    [Switch]
-    $UseStableBranding,
-
     # When set, only prints out an Azure DevOps variable with the value of the args to pass to update-dependencies.
     [Switch]
     $PrintArgsVariableOnly
@@ -52,10 +48,6 @@ if ($RuntimeVersion) {
 
 if ($ComputeShas) {
     $updateDepsArgs += "--compute-shas"
-}
-
-if ($UseStableBranding) {
-    $updateDepsArgs += "--stable-branding"
 }
 
 if ($PrintArgsVariableOnly) {

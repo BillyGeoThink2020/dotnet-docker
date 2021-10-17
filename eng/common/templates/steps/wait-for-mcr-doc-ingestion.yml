@@ -8,7 +8,7 @@ steps:
     $(runImageBuilderCmd) waitForMcrDocIngestion
     '${{ parameters.commitDigest }}'
     '$(mcrStatus.servicePrincipalName)'
-    '$(mcrStatus.servicePrincipalPassword)'
+    '$(app-DotnetDockerMcrStatusApi-client-secret)'
     '$(mcrStatus.servicePrincipalTenant)'
     --timeout '$(mcrDocIngestionTimeout)'
     ${{ parameters.dryRunArg }}

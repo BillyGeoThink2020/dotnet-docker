@@ -9,10 +9,7 @@ schedules:
     - nightly
   always: true
 variables:
-- template: ../common/templates/variables/dotnet/common.yml
+- template: variables/common.yml
 
 jobs:
 - template: ../common/templates/jobs/validate-image-sizes.yml
-  parameters:
-    internalProjectName: ${{ variables.internalProjectName }}
-    publicProjectName: ${{ variables.publicProjectName }}

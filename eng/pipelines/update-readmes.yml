@@ -1,16 +1,13 @@
 trigger: none
 pr: none
 variables:
-- template: variables/core.yml
+- template: variables/common.yml
+- name: manifest
+  value: manifest.json
 jobs:
 - job: UpdateReadmes
-  pool: $(defaultLinuxAmd64PoolImage)
+  pool: Hosted Ubuntu 1604
   steps:
   - template: ../common/templates/steps/init-docker-linux.yml
-  - template: steps/set-public-source-branch-var.yml
-  - template: ../common/templates/steps/set-image-info-path-var
-    parameters:
-      publicSourceBranch: $(publicSourceBranch)
-  - template: steps/set-publish-mcrdocs-args-var.yml
   - template: ../common/templates/steps/publish-readmes.yml
   - template: ../common/templates/steps/cleanup-docker-linux.yml

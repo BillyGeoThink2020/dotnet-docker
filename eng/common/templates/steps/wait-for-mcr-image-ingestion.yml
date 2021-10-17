@@ -9,7 +9,7 @@ steps:
     $(runImageBuilderCmd) waitForMcrImageIngestion
     '${{ parameters.imageInfoPath }}'
     '$(mcrStatus.servicePrincipalName)'
-    '$(mcrStatus.servicePrincipalPassword)'
+    '$(app-DotnetDockerMcrStatusApi-client-secret)'
     '$(mcrStatus.servicePrincipalTenant)'
     --manifest '$(manifest)'
     --min-queue-time '${{ parameters.minQueueTime }}'

@@ -1,25 +1,24 @@
 parameters:
   name: null
-  pool: {}
   additionalOptions: null
-  publicProjectName: null
   
 jobs:
 - job: ${{ parameters.name }}
-  pool: ${{ parameters.pool }}
+  pool:
+    vmImage: $(defaultLinuxAmd64PoolImage)
   steps:
   - template: ../steps/init-docker-linux.yml
-  - ${{ if eq(variables['System.TeamProject'], parameters.publicProjectName) }}:
+  - ${{ if eq(variables['System.TeamProject'], 'public') }}:
     - template: ../steps/set-dry-run.yml
   - script: >
       $(runImageBuilderCmd)
       copyBaseImages
       '$(acr.servicePrincipalName)'
-      '$(acr.servicePrincipalPassword)'
+      '$(app-dotnetdockerbuild-client-secret)'
       '$(acr.servicePrincipalTenant)'
       '$(acr.subscription)'
       '$(acr.resourceGroup)'
-      $(mirrorRegistryCreds)
+      --registry-creds 'docker.io=$(dotnetDockerHubBot.userName);$(BotAccount-dotnet-dockerhub-bot-PAT)'
       --repo-prefix $(mirrorRepoPrefix)
       --registry-override '$(acr.server)'
       --os-type 'linux'
